@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
 		sr = GetComponent<SpriteRenderer>();
 		anim.speed = 1;
 
+		//Associate direction with its vector value
 		directions = new Dictionary<string, Vector2>()
 		{
 			{"up", Vector2.up},
@@ -41,6 +42,10 @@ public class PlayerController : MonoBehaviour
 		Movement();
 	}
 
+	/*
+	 * Moves the player in direction based on WASD keys being held down
+	 * Shift makes link move faster
+	 */
 	void Movement()
 	{
 		Vector2 direction = Vector2.zero;

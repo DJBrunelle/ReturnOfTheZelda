@@ -1,5 +1,2 @@
 # Game
-Twerking on it
-Lel Twerk
-y git so broke
-awdawd
+Basically OG Zelda remake
