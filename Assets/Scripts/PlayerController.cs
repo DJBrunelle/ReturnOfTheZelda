@@ -2,81 +2,102 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour
+{
 
-    
-    public int speed;
-    private Animator anim;
-    private SpriteRenderer sr;
-    float animspeed;
+
+	public int speed;
+	private Animator anim;
+	private SpriteRenderer sr;
+	float animspeed;
+
+	Dictionary<string, Vector2> directions;
 
 
 	// Use this for initialization
-	void Start () 
-    {
-        anim = GetComponent<Animator>();
-        sr = GetComponent<SpriteRenderer>();
-    
-    
+	void Start()
+	{
+		anim = GetComponent<Animator>();
+		sr = GetComponent<SpriteRenderer>();
+		anim.speed = 1;
+
+		directions = new Dictionary<string, Vector2>()
+		{
+			{"up", Vector2.up},
+			{"down", Vector2.down},
+			{"left", Vector2.left},
+			{"right", Vector2.right},
+			{"upRight", new Vector2(1,1)},
+			{"upLeft", new Vector2(-1,1)},
+			{"downRight", new Vector2(1,-1)},
+			{"downLeft", new Vector2(-1,-1)},
+		};
+
 	}
-	
+
 	// Update is called once per frame
-	void Update () {
-        //if(Input.GetKeyDown(KeyCode.D)) anim.Play("Link Right");
-        //if(Input.GetKeyDown(KeyCode.A)) anim.Play("Link Right");
-        //if(Input.GetKeyDown(KeyCode.W)) anim.Play("Link Up");
-        //if(Input.GetKeyDown(KeyCode.S)) anim.Play("Link Down");
-        //if(Input.GetKeyUp(KeyCode.D)) anim.Play("Link move left"); anim.speed = 0;
-        //if(Input.GetKeyUp(KeyCode.A)) anim.Play("Link move left"); anim.speed = 0;
-        //if(Input.GetKeyUp(KeyCode.W)) anim.Play("Link stop up"); anim.speed = 0;
-        //if(Input.GetKeyUp(KeyCode.S)) anim.Play("Link move down"); anim.speed = 0;
-        
-        
+	void Update()
+	{
+		Movement();
+	}
 
-    
-		if(Input.GetKey(KeyCode.W))
-        {   
-            anim.Play("Link Up");
-            anim.speed = 1;
-            transform.position += (Vector3)(Vector2.up * speed) * Time.deltaTime;
+	void Movement()
+	{
+		Vector2 direction = Vector2.zero;
 
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-        
-            sr.flipX = false;
-            anim.Play("Link Right");
-            anim.speed = 1;
-            transform.position += (Vector3)(Vector2.right * speed) * Time.deltaTime;
+		if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D))
+		{
+			anim.Play("LinkUpRight");
+			sr.flipX = false;
+			direction = directions["upRight"];
+		}
+		else if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A))
+		{
+			anim.Play("LinkUpRight");
+			sr.flipX = true;
+			direction = directions["upLeft"];
+		}
+		else if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D))
+		{
+			anim.Play("LinkDownLeft");
+			sr.flipX = true;
+			direction = directions["downRight"];
+		}
+		else if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.A))
+		{
+			anim.Play("LinkDownLeft");
+			sr.flipX = false;
+			direction = directions["downLeft"];
+		}
+		else if (Input.GetKey(KeyCode.W))
+		{
+			anim.Play("Link Up");
+			direction = directions["up"];
+		}
+		else if (Input.GetKey(KeyCode.D))
+		{
+			sr.flipX = false;
+			anim.Play("Link Right");
+			direction = directions["right"];
+		}
+		else if (Input.GetKey(KeyCode.S))
+		{
+			anim.Play("Link Down");
+			direction = directions["down"];
+		}
+		else if (Input.GetKey(KeyCode.A))
+		{
+			sr.flipX = true;
+			anim.Play("Link Right");
+			direction = directions["left"];
+		}
 
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            anim.Play("Link Down");
-            anim.speed = 1;
-            transform.position += (Vector3)(Vector2.down * speed) * Time.deltaTime;
-            
+		int finalSpeed = speed;
+		if (Input.GetKey(KeyCode.LeftShift))
+		{
+			finalSpeed = speed + (speed / 2);
+		}
 
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            sr.flipX = true;
-            anim.Play("Link Right");
-            anim.speed = 1;
-            transform.position += (Vector3)(Vector2.left * speed) * Time.deltaTime;
-
-
-        }
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            
-   
-
-        }
-        GUI.Label(new Rect(0, 25, 40, 60), "Speed");
-
-        animspeed = GUI.HorizontalSlider(new Rect(45, 25, 200, 60), animspeed, 0.0F, 1.0F);
-        anim.speed = animspeed;
-  
-    }
+		transform.position += (Vector3)(direction * finalSpeed) * Time.deltaTime;
+	}
 }
