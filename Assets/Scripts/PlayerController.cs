@@ -2,15 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour {
+public class PlayerController : MonoBehaviour {
 
     
     public int speed;
     private Animator anim;
     private SpriteRenderer sr;
     float animspeed;
-
-    private left D;
 
 
 	// Use this for initialization
