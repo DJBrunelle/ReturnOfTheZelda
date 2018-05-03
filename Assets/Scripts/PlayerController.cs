@@ -28,10 +28,10 @@ public class PlayerController : MonoBehaviour
 			{"down", Vector2.down},
 			{"left", Vector2.left},
 			{"right", Vector2.right},
-			{"upRight", new Vector2(1,1)},
-			{"upLeft", new Vector2(-1,1)},
-			{"downRight", new Vector2(1,-1)},
-			{"downLeft", new Vector2(-1,-1)},
+			{"upRight", new Vector2(1,1).normalized},
+			{"upLeft", new Vector2(-1,1).normalized},
+			{"downRight", new Vector2(1,-1).normalized},
+			{"downLeft", new Vector2(-1,-1).normalized},
 		};
 
 	}
