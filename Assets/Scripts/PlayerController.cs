@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
 	private struct MoveState
 	{
 		public string name;
+		public string idle;
+		public int paramMove;
 		public KeyCode[] keys;
 		public Vector2 direction;
 		public bool flip;
@@ -51,6 +53,8 @@ public class PlayerController : MonoBehaviour
 			//Up Right
 			{moveDirs[0], new MoveState{
 				name = "LinkUpRight",
+				idle = "urIdle",
+				paramMove = 3,
 				keys = new KeyCode[]{KeyCode.W, KeyCode.D},
 				direction = new Vector2(1,1).normalized,
 				flip = false
@@ -58,6 +62,8 @@ public class PlayerController : MonoBehaviour
 			//Up Left
 			{moveDirs[1], new MoveState{
 				name = "LinkUpRight",
+				idle = "urIdle",
+				paramMove = 3,
 				keys = new KeyCode[]{KeyCode.W, KeyCode.A},
 				direction = new Vector2(-1,1).normalized,
 				flip = true
@@ -65,6 +71,8 @@ public class PlayerController : MonoBehaviour
 			//Down Right
 			{moveDirs[2], new MoveState{
 				name = "LinkDownLeft",
+				idle = "dlIdle",
+				paramMove = 4,
 				keys = new KeyCode[]{KeyCode.S, KeyCode.D},
 				direction = new Vector2(1,-1).normalized,
 				flip = true
@@ -72,6 +80,8 @@ public class PlayerController : MonoBehaviour
 			//Down Left
 			{moveDirs[3], new MoveState{
 				name = "LinkDownLeft",
+				idle = "dlIdle",
+				paramMove = 4,
 				keys = new KeyCode[]{KeyCode.S, KeyCode.A},
 				direction = new Vector2(-1,-1).normalized,
 				flip = false
@@ -79,6 +89,8 @@ public class PlayerController : MonoBehaviour
 			//Right
 			{moveDirs[4], new MoveState{
 				name = "Link Right",
+				idle = "rtIdle",
+				paramMove = 0,
 				keys = new KeyCode[]{KeyCode.D},
 				direction = Vector2.right,
 				flip = false
@@ -86,6 +98,8 @@ public class PlayerController : MonoBehaviour
 			//Left
 			{moveDirs[5], new MoveState{
 				name = "Link Right",
+				idle = "urIdle",
+				paramMove = 0,
 				keys = new KeyCode[]{KeyCode.A},
 				direction = Vector2.left,
 				flip = true
@@ -93,6 +107,8 @@ public class PlayerController : MonoBehaviour
 			//Up
 			{moveDirs[6], new MoveState{
 				name = "Link Up",
+				idle = "upIdle",
+				paramMove = 2,
 				keys = new KeyCode[]{KeyCode.W},
 				direction = Vector2.up,
 				flip = false
@@ -100,6 +116,8 @@ public class PlayerController : MonoBehaviour
 			//Down
 			{moveDirs[7], new MoveState{
 				name = "Link Down",
+				idle = "dnIdle",
+				paramMove = 1,
 				keys = new KeyCode[]{KeyCode.S},
 				direction = Vector2.down,
 				flip = false
@@ -124,7 +142,6 @@ public class PlayerController : MonoBehaviour
 	void Movement()
 	{
 		MoveState moveState = new MoveState() { name = "" };
-		anim.speed = 1;
 
 		//Check each possible direction
 		foreach (string dir in moveDirs)
@@ -150,8 +167,8 @@ public class PlayerController : MonoBehaviour
 		//Set animation if state was found
 		if (moveState.name != "")
 		{
-
 			anim.Play(moveState.name);
+			anim.SetInteger("Movement", moveState.paramMove);
 			sr.flipX = moveState.flip;
 
 			//Speed up if shift is being pressed
@@ -165,10 +182,9 @@ public class PlayerController : MonoBehaviour
 			transform.position += (Vector3)(moveState.direction * finalSpeed) * Time.deltaTime;
 			linkState = State.Moving;
 		}
-		else // pause on current animation
+		else // pause on current animation if keys not being pressed 
 		{
-			anim.Play(moveState.name, 0, 0f);
-			anim.speed = 0;
+			anim.SetInteger("Movement", -1);
 			linkState = State.Idle;
 		}
 	}
