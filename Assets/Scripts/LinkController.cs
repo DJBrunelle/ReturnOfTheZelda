@@ -44,10 +44,10 @@ public class LinkController : MonoBehaviour
 		{
 			bool found = true;
 			//Check keys required for each direction
-			foreach (KeyCode key in LinkData.moveDict[dir].keys)
+			foreach (string key in LinkData.moveDict[dir].keys)
 			{
 				//keys not being pressed
-				if (!Input.GetKey(key))
+				if (!Input.GetButton(key))
 				{
 					found = false;
 				}

@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LinkData : MonoBehaviour {
+public class LinkData : MonoBehaviour
+{
 
 	//State struct to represent the movement variables of each direction
 	public struct MoveState
@@ -10,7 +11,7 @@ public class LinkData : MonoBehaviour {
 		public string name;
 		public string idle;
 		public int paramMove;
-		public KeyCode[] keys;
+		public string[] keys;
 		public Vector2 direction;
 		public bool flip;
 	}
@@ -35,7 +36,7 @@ public class LinkData : MonoBehaviour {
 				name = "LinkUpRight",
 				idle = "urIdle",
 				paramMove = 3,
-				keys = new KeyCode[]{KeyCode.W, KeyCode.D},
+				keys = new string[]{"Up", "Right"},
 				direction = new Vector2(1,1).normalized,
 				flip = false
 			}},
@@ -44,7 +45,7 @@ public class LinkData : MonoBehaviour {
 				name = "LinkUpRight",
 				idle = "urIdle",
 				paramMove = 3,
-				keys = new KeyCode[]{KeyCode.W, KeyCode.A},
+				keys = new string[]{"Up", "Left"},
 				direction = new Vector2(-1,1).normalized,
 				flip = true
 			}},
@@ -53,7 +54,7 @@ public class LinkData : MonoBehaviour {
 				name = "LinkDownLeft",
 				idle = "dlIdle",
 				paramMove = 4,
-				keys = new KeyCode[]{KeyCode.S, KeyCode.D},
+				keys = new string[]{"Down", "Right"},
 				direction = new Vector2(1,-1).normalized,
 				flip = true
 			}},
@@ -62,7 +63,7 @@ public class LinkData : MonoBehaviour {
 				name = "LinkDownLeft",
 				idle = "dlIdle",
 				paramMove = 4,
-				keys = new KeyCode[]{KeyCode.S, KeyCode.A},
+				keys = new string[]{"Down", "Left"},
 				direction = new Vector2(-1,-1).normalized,
 				flip = false
 			}},
@@ -71,7 +72,7 @@ public class LinkData : MonoBehaviour {
 				name = "Link Right",
 				idle = "rtIdle",
 				paramMove = 0,
-				keys = new KeyCode[]{KeyCode.D},
+				keys = new string[]{"Right"},
 				direction = Vector2.right,
 				flip = false
 			}},
@@ -80,7 +81,7 @@ public class LinkData : MonoBehaviour {
 				name = "Link Right",
 				idle = "urIdle",
 				paramMove = 0,
-				keys = new KeyCode[]{KeyCode.A},
+				keys = new string[]{"Left"},
 				direction = Vector2.left,
 				flip = true
 			}},
@@ -89,7 +90,7 @@ public class LinkData : MonoBehaviour {
 				name = "Link Up",
 				idle = "upIdle",
 				paramMove = 2,
-				keys = new KeyCode[]{KeyCode.W},
+				keys = new string[]{"Up"},
 				direction = Vector2.up,
 				flip = false
 			}},
@@ -98,7 +99,7 @@ public class LinkData : MonoBehaviour {
 				name = "Link Down",
 				idle = "dnIdle",
 				paramMove = 1,
-				keys = new KeyCode[]{KeyCode.S},
+				keys = new string[]{"Down"},
 				direction = Vector2.down,
 				flip = false
 			}},
