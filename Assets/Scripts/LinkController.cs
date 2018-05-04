@@ -9,7 +9,6 @@ public class LinkController : MonoBehaviour
 
 	private Animator anim;
 	private SpriteRenderer sr;
-	private float animspeed;
 	private enum State { Idle, Moving, Attacking, Frozen };
 	private State linkState;
 
@@ -38,13 +37,14 @@ public class LinkController : MonoBehaviour
 	void Movement()
 	{
 		LinkData.MoveState moveState = new LinkData.MoveState() { name = "" };
+		anim.speed = 1;
 
 		//Check each possible direction
-		foreach (string dir in LinkData.moveDirs)
+		foreach (string dir in LinkData.moveDirections)
 		{
 			bool found = true;
 			//Check keys required for each direction
-			foreach (string key in LinkData.moveDict[dir].keys)
+			foreach (string key in LinkData.moveStateDict[dir].keys)
 			{
 				//keys not being pressed
 				if (!Input.GetButton(key))
@@ -56,7 +56,7 @@ public class LinkController : MonoBehaviour
 			//set state to this direction and exit loop
 			if (found)
 			{
-				moveState = LinkData.moveDict[dir];
+				moveState = LinkData.moveStateDict[dir];
 				break;
 			}
 		}
@@ -71,7 +71,8 @@ public class LinkController : MonoBehaviour
 			int finalSpeed = speed;
 			if (Input.GetKey(KeyCode.LeftShift))
 			{
-				finalSpeed = speed + (speed / 2);
+				finalSpeed += (speed / 2);
+				anim.speed = 1.5f;
 			}
 
 			//Move player in state direction

@@ -27,12 +27,12 @@ public class LinkData : MonoBehaviour
 	 * up = Up
 	 * dn = Down
 	 */
-	public static string[] moveDirs = new string[] { "ur", "ul", "dr", "dl", "rt", "lt", "up", "dn" };
+	public static string[] moveDirections = new string[] { "ur", "ul", "dr", "dl", "rt", "lt", "up", "dn" };
 
 	//Define states for each type of movement
-	public static Dictionary<string, MoveState> moveDict = new Dictionary<string, MoveState>(){
+	public static Dictionary<string, MoveState> moveStateDict = new Dictionary<string, MoveState>(){
 		//Up Right
-		{moveDirs[0], new MoveState{
+		{moveDirections[0], new MoveState{
 			name = "LinkUpRight",
 			idle = "urIdle",
 			paramMove = 3,
@@ -41,7 +41,7 @@ public class LinkData : MonoBehaviour
 			flip = false
 		}},
 		//Up Left
-		{moveDirs[1], new MoveState{
+		{moveDirections[1], new MoveState{
 			name = "LinkUpRight",
 			idle = "urIdle",
 			paramMove = 3,
@@ -50,7 +50,7 @@ public class LinkData : MonoBehaviour
 			flip = true
 		}},
 		//Down Right
-		{moveDirs[2], new MoveState{
+		{moveDirections[2], new MoveState{
 			name = "LinkDownLeft",
 			idle = "dlIdle",
 			paramMove = 4,
@@ -59,7 +59,7 @@ public class LinkData : MonoBehaviour
 			flip = true
 		}},
 		//Down Left
-		{moveDirs[3], new MoveState{
+		{moveDirections[3], new MoveState{
 			name = "LinkDownLeft",
 			idle = "dlIdle",
 			paramMove = 4,
@@ -68,7 +68,7 @@ public class LinkData : MonoBehaviour
 			flip = false
 		}},
 		//Right
-		{moveDirs[4], new MoveState{
+		{moveDirections[4], new MoveState{
 			name = "Link Right",
 			idle = "rtIdle",
 			paramMove = 0,
@@ -77,7 +77,7 @@ public class LinkData : MonoBehaviour
 			flip = false
 		}},
 		//Left
-		{moveDirs[5], new MoveState{
+		{moveDirections[5], new MoveState{
 			name = "Link Right",
 			idle = "urIdle",
 			paramMove = 0,
@@ -86,7 +86,7 @@ public class LinkData : MonoBehaviour
 			flip = true
 		}},
 		//Up
-		{moveDirs[6], new MoveState{
+		{moveDirections[6], new MoveState{
 			name = "Link Up",
 			idle = "upIdle",
 			paramMove = 2,
@@ -95,7 +95,7 @@ public class LinkData : MonoBehaviour
 			flip = false
 		}},
 		//Down
-		{moveDirs[7], new MoveState{
+		{moveDirections[7], new MoveState{
 			name = "Link Down",
 			idle = "dnIdle",
 			paramMove = 1,
