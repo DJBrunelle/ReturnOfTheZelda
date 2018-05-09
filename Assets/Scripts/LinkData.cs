@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Class to represent static data for link actions
+ * 
+ * Author: Daniel Brunelle 
+ */
 public class LinkData : MonoBehaviour
 {
 

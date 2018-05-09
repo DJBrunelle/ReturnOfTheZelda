@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Class for controlling behaviour of link in game
+ *
+ * Authors: Daniel Brunelle & Derek Frost
+ */
 public class LinkController : MonoBehaviour
 {
 
